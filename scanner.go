@@ -6,7 +6,6 @@ import (
 	"net"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/zserge/hid"
 )
@@ -28,7 +27,7 @@ func loop(device hid.Device, addr string) {
 	defer conn.Close()
 
 	for {
-		buf, err := device.Read(-1, 1*time.Second)
+		buf, err := device.Read(-1, 0)
 		if err == nil {
 			line := string(buf[:])
 			if len(line) > 0 {
