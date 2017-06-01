@@ -28,9 +28,7 @@ func loop(device hid.Device, addr string) {
 	defer conn.Close()
 
 	for {
-		dur, _ := time.ParseDuration("60000ms")
-		buf, err := device.Read(-1, dur)
-
+		buf, err := device.Read(-1, 1*time.Second)
 		if err == nil {
 			line := string(buf[:])
 			if len(line) > 0 {
@@ -47,7 +45,6 @@ func loop(device hid.Device, addr string) {
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Printf("USAGE: %s ip:port\n", os.Args[0])
-		fmt.Println()
 		return
 	}
 

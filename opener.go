@@ -13,7 +13,6 @@ import (
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Printf("USAGE: %s [port]\n", os.Args[0])
-		fmt.Println()
 		return
 	}
 

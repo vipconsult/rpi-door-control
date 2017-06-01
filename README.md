@@ -4,16 +4,11 @@ Remove the timeout in the read loop
 
 Troubleshoot connection loss
 
-Think how to work together on the same files
-Vendor the used packages!
 
 Health check
 	Check connection with the reader and restart the pi on failed
 		no way to test the reader is working- if no reading is taken in 3h , restart the usb ports?
 	Check that the golang server reply handler can accept request
-
-
-
 
 	*** Install binaries so that the systemd service manager runs them as a service
 		GOBIN=/usr/local/bin go install opener.go
@@ -30,4 +25,10 @@ Health check
 		journalctl -u scanner -u opener -f --since "2017-06-01 17:15:00"
 			-u unit name(service) , -f follow
 
-		journald automaticaly removes old logs to keep enough free system space
+		log rotating and space management is all handled automaticaly by journald :)
+
+	*** Update dependancy packages
+		all dependant packages are vendored in the vendor folder using
+		`dep init`
+		to update a package to the latest version
+		`dep ensure github.com/krasi-georgiev/rpiGpio@^0.8.0`
