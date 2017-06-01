@@ -31,15 +31,15 @@ func loop(device hid.Device, addr string) {
 		dur, _ := time.ParseDuration("60000ms")
 		buf, err := device.Read(-1, dur)
 
-		if err != nil {
+		if err == nil {
+			line := string(buf[:])
+			if len(line) > 0 {
+				line = strings.Trim(line, "\x00\r\n#")
+				log.Println(line)
+				conn.Write([]byte(line))
+			}
+		} else {
 			fmt.Println(os.Stderr, err.Error())
-		}
-
-		line := string(buf[:])
-		if len(line) > 0 {
-			line = strings.Trim(line, "\x00\r\n#")
-			log.Println(line)
-			conn.Write([]byte(line))
 		}
 	}
 }
