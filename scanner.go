@@ -6,6 +6,7 @@ import (
 	"net"
 	"os"
 	"strings"
+	//"time"
 
 	"github.com/zserge/hid"
 )
@@ -27,16 +28,17 @@ func loop(device hid.Device, addr string) {
 	defer conn.Close()
 
 	for {
+		//dur, _ := time.ParseDuration("60000ms")
 		buf, err := device.Read(-1, 0)
 		if err == nil {
 			line := string(buf[:])
 			if len(line) > 0 {
-				line = strings.Trim(line, "\x00\r\n#")
+				line = strings.Trim(line, "\x00")
+				line = line[1:]
 				log.Println(line)
+				line += "\x00"
 				conn.Write([]byte(line))
 			}
-		} else {
-			fmt.Println(os.Stderr, err.Error())
 		}
 	}
 }
