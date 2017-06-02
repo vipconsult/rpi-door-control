@@ -29,5 +29,6 @@ journalctl -u scanner -u opener -f --since "2017-06-01 17:15:00"
 ## Update dependancy packages
 all dependant packages are vendored in the vendor folder using
 `dep init`
+
 to update a package to the latest version
 `dep ensure github.com/krasi-georgiev/rpiGpio@^0.8.0`
