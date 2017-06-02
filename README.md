@@ -1,21 +1,9 @@
-// TO DO
-
-?Remove the timeout in the read loop
-
-Troubleshoot connection loss
-
-
-Health check
-	Check connection with the reader and restart the pi on failed
-		no way to test the reader is working- if no reading is taken in 3h , restart the usb ports?
-	Check that the golang server reply handler can accept request
-
 	*** Install binaries so that the systemd service manager runs them as a service
 		GOBIN=/usr/local/bin go install opener.go
 		GOBIN=/usr/local/bin go install scanner.go
 	*** Restart the services to run the latest installed files
-		systemctl restart opener.service
-		systemctl restart scanner.service
+		systemctl restart opener
+		systemctl restart scanner
 
 	*** Service config files
 		/lib/systemd/system/scanner.service
