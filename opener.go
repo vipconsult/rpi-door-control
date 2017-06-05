@@ -37,9 +37,14 @@ func main() {
 func handleClient(conn *net.UDPConn) {
 	var buf [512]byte
 	len, _, err := conn.ReadFromUDP(buf[0:])
-	line := string(buf[:len])
-	log.Println(line)
-	if strings.HasPrefix(line, "OPEN|") {
+	if err != nil {
+		fmt.Fprint(os.Stderr, err.Error())
+	}
+	recieved := string(buf[:len])
+	log.Println(recieved)
+
+	match := "OPEN|"
+	if strings.HasPrefix(recieved, match) {
 		go func() {
 			t := rpiGpio.NewControl()
 			t.SetType("timer")
@@ -49,8 +54,8 @@ func handleClient(conn *net.UDPConn) {
 				fmt.Println(os.Stderr, err.Error())
 			}
 		}()
+	} else {
+		log.Println("Recieved string:", recieved, ", doesn't include:", match)
 	}
-	if err != nil {
-		fmt.Fprint(os.Stderr, err.Error())
-	}
+
 }
