@@ -34,9 +34,8 @@ func loop(device hid.Device, addr string) {
 			line := string(buf[:])
 			if len(line) > 0 {
 				line = strings.Trim(line, "\x00")
-				line = line[1:]
 				log.Println(line)
-				line += "\x00"
+				line = "CHECK|" + line[1:] + "\x00"
 				conn.Write([]byte(line))
 			}
 		}

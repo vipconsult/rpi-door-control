@@ -39,7 +39,7 @@ func handleClient(conn *net.UDPConn) {
 	len, _, err := conn.ReadFromUDP(buf[0:])
 	line := string(buf[:len])
 	log.Println(line)
-	if strings.HasPrefix(line, "OPEN") {
+	if strings.HasPrefix(line, "OPEN|") {
 		go func() {
 			t := rpiGpio.NewControl()
 			t.SetType("timer")
