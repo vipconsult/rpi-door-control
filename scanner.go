@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"strings"
+	"time"
 	//"time"
 
 	"github.com/zserge/hid"
@@ -29,13 +29,13 @@ func loop(device hid.Device, addr string) {
 
 	for {
 		//dur, _ := time.ParseDuration("60000ms")
-		buf, err := device.Read(-1, 0)
+		buf, err := device.Read(-1, 10*time.Second)
 		if err == nil {
 			line := string(buf[:])
 			if len(line) > 0 {
 				line = strings.Trim(line, "\x00")
-				log.Println(line)
 				line = "CHECK|" + line[1:] + "\x00"
+				fmt.Println("Sending data:", line)
 				conn.Write([]byte(line))
 			}
 		}

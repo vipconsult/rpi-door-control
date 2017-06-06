@@ -48,7 +48,7 @@ func handleClient(conn *net.UDPConn) {
 		go func() {
 			t := rpiGpio.NewControl()
 			t.SetType("timer")
-			t.SetDelay("5s")
+			t.SetDelay("1s")
 			t.SetPin("18")
 			if err := t.StartTimer(nil); err != nil {
 				fmt.Println(os.Stderr, err.Error())

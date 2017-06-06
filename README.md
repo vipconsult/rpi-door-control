@@ -1,22 +1,29 @@
 # Access control app written in golang for Raspberry PI
-*consist of a scanner reader and udp server listener* 
-  * The scanner scans an image and send the raw ASCII to an access control server for a check 
+*consist of a scanner reader and udp server listener*
+  * The scanner scans an image and send the raw ASCII to an access control server for a check
   * The opener is an UDP server listener which will trigger a pin output based on a string received on the socket
 
 ## Install binaries so that the systemd service manager runs them as a service
 	GOBIN=/usr/local/bin go install opener.go
 	GOBIN=/usr/local/bin go install scanner.go
 ## Restart the services to run the latest installed files
-``` 
+```
 systemctl restart opener
 systemctl restart scanner
-``` 
+```
 
 ## Service config files
-``` 
+```
 /lib/systemd/system/scanner.service
 /lib/systemd/system/opener.service
-``` 
+```
+## Service start on boot
+```
+systemctl enable opener
+systemctl enable scanner
+
+```
+
 
 ## Check the service logs
 
