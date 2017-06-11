@@ -51,4 +51,5 @@ func main() {
 	hid.UsbWalk(func(device hid.Device) {
 		loop(device, os.Args[1])
 	})
+
 }

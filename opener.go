@@ -36,7 +36,7 @@ func main() {
 
 func handleClient(conn *net.UDPConn) {
 	var buf [512]byte
-	len, _, err := conn.ReadFromUDP(buf[0:])
+	len, _, err := conn.ReadFromUDP(buf[:])
 	if err != nil {
 		fmt.Fprint(os.Stderr, err.Error())
 	}

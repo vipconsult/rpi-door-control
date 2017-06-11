@@ -15,7 +15,31 @@ systemctl restart scanner
 ## Service config files
 ```
 /lib/systemd/system/scanner.service
+
+[Unit]
+  Description=Scanner Reader
+
+  [Service]
+  ExecStart=/usr/local/bin/scanner 127.0.0.1:2002
+  ExecStartPre=/bin/sleep 5
+  Restart=always
+  RestartSec=10
+
+  [Install]
+  WantedBy=multi-user.target
+
 /lib/systemd/system/opener.service
+
+[Unit]
+  Description=Door Control listener
+
+  [Service]
+  ExecStart=/usr/local/bin/opener 2001
+  Restart=always
+  RestartSec=1
+
+  [Install]
+  WantedBy=multi-user.target
 ```
 ## Service start on boot
 ```
