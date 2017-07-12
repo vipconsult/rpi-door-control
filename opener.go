@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/krasi-georgiev/door/display"
 	"github.com/krasi-georgiev/rpiGpio"
 )
 
@@ -46,16 +47,19 @@ func handleClient(conn *net.UDPConn) {
 	match := "OPEN|"
 	if strings.HasPrefix(recieved, match) {
 		go func() {
+			display.Success()
+		}()
+		go func() {
 			t := rpiGpio.NewControl()
 			t.SetType("timer")
 			t.SetDelay("1s")
 			t.SetPin("18")
-			if err := t.StartTimer(nil); err != nil {
-				fmt.Println(os.Stderr, err.Error())
-			}
+			t.StartTimer(nil)
 		}()
 	} else {
-		log.Println("Recieved string:", recieved, ", doesn't include:", match)
+		go func() {
+			display.Error()
+		}()
 	}
 
 }
