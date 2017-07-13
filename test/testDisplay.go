@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/krasi-georgiev/door/display"
+	"../display"
 )
 
 func main() {
