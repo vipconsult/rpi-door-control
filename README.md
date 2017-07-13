@@ -1,7 +1,3 @@
-TODO
- remove the pin logs - HIGH, low
-
-
 # Access control app written in golang for Raspberry PI
 *consist of a scanner reader and udp server listener*
   * The scanner scans an image and send the raw ASCII to an access control server for a check

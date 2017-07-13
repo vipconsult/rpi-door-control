@@ -7,7 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/krasi-georgiev/door/display"
+	"./display"
+
 	"github.com/krasi-georgiev/rpiGpio"
 )
 
@@ -54,7 +55,9 @@ func handleClient(conn *net.UDPConn) {
 			t.SetType("timer")
 			t.SetDelay("1s")
 			t.SetPin("18")
-			t.StartTimer(nil)
+			if err := t.StartTimer(nil); err != nil {
+				log.Println(err)
+			}
 		}()
 	} else {
 		go func() {

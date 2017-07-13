@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/krasi-georgiev/door/i2c"
+	"../i2c"
 )
 
 func New() *i2c.I2C {
