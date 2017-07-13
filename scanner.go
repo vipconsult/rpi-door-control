@@ -6,7 +6,6 @@ import (
 	"os"
 	"strings"
 	"time"
-	//"time"
 
 	"github.com/zserge/hid"
 )

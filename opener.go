@@ -6,10 +6,10 @@ import (
 	"net"
 	"os"
 	"strings"
+	"time"
 
 	"./display"
-
-	"github.com/krasi-georgiev/rpiGpio"
+	"./rpiGpio"
 )
 
 func main() {
@@ -51,11 +51,9 @@ func handleClient(conn *net.UDPConn) {
 			display.Success()
 		}()
 		go func() {
-			t := rpiGpio.NewControl()
-			t.SetType("timer")
-			t.SetDelay("1s")
-			t.SetPin("18")
-			if err := t.StartTimer(nil); err != nil {
+			delay, _ := time.ParseDuration("1s")
+			control := rpiGpio.NewControl("18", delay);
+			if err := control.Start(); err != nil {
 				log.Println(err)
 			}
 		}()
