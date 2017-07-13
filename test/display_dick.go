@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/d2r2/go-i2c"
+	"../i2c"
 )
 
 func main() {
@@ -16,11 +16,10 @@ func main() {
 
 	i2c.Write([]byte{0x21, 0x00})
 	i2c.Write([]byte{0x81, 0x00})
-	
-	
+
 	for {
-		
-		for i:=0; i <= 0x0f; i++ {
+
+		for i := 0; i <= 0x0f; i++ {
 			i2c.Write([]byte{byte(i), 0x00})
 		}
 		i2c.Write([]byte{0x00, 0x66})
@@ -31,11 +30,10 @@ func main() {
 		i2c.Write([]byte{0x0a, 0x18})
 		time.Sleep(time.Millisecond * 500)
 
-		
-		for i:=0; i <= 0x0f; i++ {
+		for i := 0; i <= 0x0f; i++ {
 			i2c.Write([]byte{byte(i), 0x00})
 		}
-		
+
 		i2c.Write([]byte{0x00, 0x66})
 		i2c.Write([]byte{0x02, 0x99})
 		i2c.Write([]byte{0x04, 0x66})
@@ -43,7 +41,7 @@ func main() {
 		i2c.Write([]byte{0x08, 0x24})
 		i2c.Write([]byte{0x0a, 0x24})
 		i2c.Write([]byte{0x0c, 0x18})
-		
+
 		i2c.Write([]byte{0x01, 0x66})
 		i2c.Write([]byte{0x03, 0x99})
 		i2c.Write([]byte{0x05, 0x66})
@@ -53,8 +51,7 @@ func main() {
 		i2c.Write([]byte{0x0d, 0x18})
 		time.Sleep(time.Millisecond * 500)
 
-		
-		for i:=0; i <= 0x0f; i++ {
+		for i := 0; i <= 0x0f; i++ {
 			i2c.Write([]byte{byte(i), 0x00})
 		}
 		i2c.Write([]byte{0x01, 0x66})
@@ -67,5 +64,5 @@ func main() {
 		i2c.Write([]byte{0x0f, 0x18})
 		time.Sleep(time.Millisecond * 500)
 	}
-	
+
 }

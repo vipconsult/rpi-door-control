@@ -1,4 +1,4 @@
-# Access control app written in golang for Raspberry PI
+# Access control app with a visual 8X8 Led display written in golang for Raspberry PI
 *consist of a scanner reader and udp server listener*
   * The scanner scans an image and send the raw ASCII to an access control server for a check
   * The opener is an UDP server listener which will trigger a pin output based on a string received on the socket
@@ -57,9 +57,5 @@ journalctl -u scanner -u opener -f --since "2017-06-01 17:15:00"
 ```
 *log rotating and log size is all handled automaticaly by journald*
 
-## Update dependancy packages
-all dependant packages are vendored in the vendor folder using
-`dep init`
-
-to update a package to the latest version
-`dep ensure github.com/krasi-georgiev/rpiGpio@^0.8.0`
+## Prerequisites
+	The 8X8 Led display is connected to the SPI port so this must be enabled using the `raspi-config`
