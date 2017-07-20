@@ -1,7 +1,6 @@
 # Access control app with a visual 8X8 Led display written in golang and Raspberry PI
 
-![alt tag](preview1.jpg)
-![alt tag](preview2.jpg)
+![alt tag](preview.jpg)
 
 
 *consist of a scanner reader and udp server listener*
