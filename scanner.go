@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"os"
 	"strings"
 	"time"
-
+	//"strconv"
 	"github.com/zserge/hid"
 )
 
 func loop(device hid.Device, addr string) {
 	if err := device.Open(); err != nil {
-		fmt.Println(os.Stderr, err.Error())
+		log.Println(os.Stderr, err.Error())
 		return
 	}
 
@@ -25,16 +26,17 @@ func loop(device hid.Device, addr string) {
 		os.Exit(1)
 	}
 	defer conn.Close()
-
+		
 	for {
-		//dur, _ := time.ParseDuration("60000ms")
 		buf, err := device.Read(-1, 10*time.Second)
-		if err == nil {
+		if (err == nil) {
 			line := string(buf[:])
-			if len(line) > 0 {
+			//log.Println("LINE: " + line)
+			//log.Println("LENGTH: " + strconv.Itoa(len(line)))
+			if len(line) > 2 {
 				line = strings.Trim(line, "\x00")
 				line = "CHECK|" + line[1:] + "\x00"
-				fmt.Println("Sending data:", line)
+				log.Println(line)
 				conn.Write([]byte(line))
 			}
 		}
