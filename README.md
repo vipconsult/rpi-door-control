@@ -1,4 +1,8 @@
-# Access control app with a visual 8X8 Led display written in golang for Raspberry PI
+# Access control app with a visual 8X8 Led display written in golang and Raspberry PI
+
+![alt tag](preview.gif)
+
+
 *consist of a scanner reader and udp server listener*
   * The scanner scans an image and send the raw ASCII to an access control server for a check
   * The opener is an UDP server listener which will trigger a pin output based on a string received on the socket
